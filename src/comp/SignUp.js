@@ -24,9 +24,12 @@ export default function SignUp() {
          setError('')
          setLoading(true)
          await signup(emailRef.current.value, passwordRef.current.value)
+         
          history.push("/signin")
+         
       } catch {
          setError("Failed to create an account")
+         setLoading(false)
       }
    }
    return (
