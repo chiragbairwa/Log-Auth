@@ -3,12 +3,10 @@ import Button from 'react-bootstrap/Button'
 import { Link, useHistory} from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContexts'
 
-// import {useState} from 'react'
-
 
 export default function Dashboard() {
-    // const [error, setError] = useState("")
     const { currentUser } = useAuth() 
+    
     const { signout } = useAuth()
 
     const history = useHistory()
@@ -22,12 +20,15 @@ export default function Dashboard() {
             alert('Failed to log out')
         }
     }
+
+    const checkId = currentUser ? true : false ;
+
     return (
         <Card style={{width: "fit-content", padding: "20px"}}>
             <h2 align="center">Profile</h2>
-            <h5>Email: {currentUser.email}</h5>
+            <h5>Email: {checkId ? currentUser.email: "LoginPls"}</h5>
 
-            <Button onClick={handle} >Log Out</Button>
+            <Button onClick={handle} disabled={!checkId}>Log Out</Button>
             <Link to="/signin">Login</Link>
             <Link to="/signup">SignUp</Link>
         </Card>
